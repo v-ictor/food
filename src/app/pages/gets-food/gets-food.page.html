@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title mode="ios">Comidas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item button *ngFor="let item of (foodsData | async)" [routerLink]="['/','get-food', item._id]" detail>
+      <ion-avatar slot="start">
+        <!-- <ion-img [src]="item.imageUrl"></ion-img> -->
+        <ion-img src="http://localhost:3000/{{item.imageFood}}"></ion-img>
+      </ion-avatar>
+      <ion-label text-wrap>
+        <h3>{{item.title}}</h3>
+        <p>{{item._id}}</p>
+        <p>{{item.price}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

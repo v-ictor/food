@@ -1,0 +1,56 @@
+<ion-header *ngIf="information">
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/gets-food"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{information.title}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button slot="start">
+        <ion-icon name="brush"></ion-icon>
+      </ion-button>
+      <ion-button slot="end" (click)="delete(information)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid color="success" class="ion-no-padding" *ngIf="information">
+    <ion-row>
+      <ion-col class="ion-no-padding">
+        <ion-img src="http://localhost:3000/{{information.imageFood}}"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center">
+      <ion-col>
+        <h1>{{information.title}}</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center">
+      <ion-col><ion-text>ID: {{information._id}}</ion-text></ion-col>
+    </ion-row>
+    <br>
+    <ion-row class="ion-text-center">
+      <ion-col><ion-text>Precio: {{information.price}}</ion-text></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-justify ion-padding">
+        {{ information.description }}
+        <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore illo minus nobis, ad expedita deleniti temporibus voluptatibus quae quaerat, odit aut? Facere ratione fuga laboriosam quibusdam ducimus totam, placeat reprehenderit?</p> -->
+
+      </ion-col>
+    </ion-row>
+    <br>
+    <ion-row class="ion-text-justify ion-padding">
+      <ion-col class="ion-text-justify ion-padding">
+        {{ information.ingredients }}
+        <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore illo minus nobis, ad expedita deleniti temporibus voluptatibus quae quaerat, odit aut? Facere ratione fuga laboriosam quibusdam ducimus totam, placeat reprehenderit?</p> -->
+
+      </ion-col>
+    </ion-row>
+    <br>
+  </ion-grid>
+
+</ion-content>

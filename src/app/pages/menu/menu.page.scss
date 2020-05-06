@@ -1,0 +1,19 @@
+.active {
+    --ion-text-color: var(--ion-color-primary);
+    ion-icon {
+        --ion-text-color-rgb: var(--ion-color-primary);
+    }
+}
+
+.active-parent {
+    font-weight: 500;
+}
+
+.sub-item {
+    padding-left: 15px;
+    font-size: small;
+    ion-icon {
+        font-size: 20px;
+        color: rgba($color: #000000, $alpha: 1);
+    }
+}
