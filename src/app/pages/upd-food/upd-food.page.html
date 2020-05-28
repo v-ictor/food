@@ -1,9 +1,68 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>updFood</ion-title>
+<ion-header *ngIf="updates">
+  <ion-toolbar color="dark">
+    <ion-title mode="ios">{{updates.title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-card style="border: 1px solid rgba(0,0,0,0.4)">
+    <ion-grid color="success" class="ion-padding"  *ngIf="updates">
+      <!-- <ion-row>
+        <ion-col class="ion-padding">
+          <ion-img src="http://localhost:3000/{{updates.imageFood}}"></ion-img>
+        </ion-col>
+      </ion-row> -->
+      <ion-item>
+        <input type="file" class="hidden" (change)="onPhotoSelected($event)" #photoInput>
+        <img [src]="photoSelected || img" style="width: 100%; height: 200px;" />
+        <!-- <img [src]="photoSelected || img" alt="" (click)="photoInput.click()" style="width: 100%; height: 200px;" /> -->
+      </ion-item>
+      <ion-button style="width: 100%; height: 50px;" color="dark" (click)="photoInput.click()">
+        <ion-icon slot="start" name="camera"></ion-icon> Cambiar Foto
+      </ion-button>
+      <br>
+      <!-- <ion-item>
+        <ion-label>ID: {{updates._id}}</ion-label>
+      </ion-item>
+      <br><br> -->
+
+      <ion-item>
+        <ion-label position="floating" style="font-weight: bold;">Nombre de la Comida: </ion-label>
+        <ion-input [(ngModel)]="updates.title" aria-placeholder="Ingrese la comida" value="{{updates.title}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" style="font-weight: bold;">Descripcion: </ion-label>
+        <ion-textarea [(ngModel)]="updates.description" aria-placeholder="Ingrese la comida" value="{{updates.description}}" rows="5"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" style="font-weight: bold;">Precio: </ion-label>
+        <ion-input [(ngModel)]='updates.price' type="number" aria-placeholder="Ingrese la comida" value="{{updates.price}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label style="font-weight: bold;">Categoria: </ion-label>
+        <ion-select [(ngModel)]="updates.category" value="{{updates.category}}">
+          <ion-select-option *ngFor="let res of (results | async)">{{res.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label position="floating">{{updates.category}}</ion-label>
+      </ion-item> -->
+      <ion-item>
+        <ion-label position="floating" style="font-weight: bold;">Ingredientes: </ion-label>
+        <ion-textarea [(ngModel)]='updates.ingredients' aria-placeholder="Ingrese la comida" value="{{updates.ingredients}}" rows="3"></ion-textarea>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-button (click)="cancelar(updates._id)" style="width: 100%; height: 50px;" color="dark">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon> Cancelar
+        </ion-button>
+        <ion-button (click)="updFoodFile(updates._id)" style="width: 100%; height: 50px;" color="dark">
+          <ion-icon slot="start" name="save"></ion-icon> Actualizar
+        </ion-button>
+      </ion-item>
+    </ion-grid>
+  </ion-card>
 
 </ion-content>

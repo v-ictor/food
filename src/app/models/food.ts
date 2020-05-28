@@ -1,9 +1,9 @@
 export class Food {
-    _id: string;
+    _id?: string;
     title: string;
     description: string;
     imageFood: string;
-    price: number;
+    price: string;
     ingredients: string;
     category: string
 }

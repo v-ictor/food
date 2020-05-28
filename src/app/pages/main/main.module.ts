@@ -8,8 +8,11 @@ import { MainPageRoutingModule } from './main-routing.module';
 
 import { MainPage } from './main.page';
 
+import { PipesModule } from "../../pipes/pipes.module";
+
 @NgModule({
   imports: [
+    PipesModule,
     CommonModule,
     FormsModule,
     IonicModule,

@@ -1,14 +1,15 @@
 <ion-header *ngIf="information">
   <ion-toolbar color="dark">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/gets-ctgry"></ion-back-button>
+      <ion-back-button defaultHref="/menu/gets-ctgry"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{information.name}}</ion-title>
+    <ion-title mode="ios">{{information.name}}</ion-title>
     <ion-buttons slot="end">
-      <ion-button slot="start">
+      <ion-button slot="start" [routerLink]="['/','upd-ctgry', information._id]">
         <ion-icon name="brush"></ion-icon>
+        <!-- <ion-icon name="brush" (click)="selectedC(information)"></ion-icon> -->
       </ion-button>
-      <ion-button slot="end" (click)="delete(information)">
+      <ion-button slot="end" (click)="delete(information._id)">
         <ion-icon name="trash"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -17,29 +18,43 @@
 
 <ion-content>
 
-  <ion-grid color="success" class="ion-no-padding" *ngIf="information">
-    <ion-row>
-      <ion-col class="ion-no-padding">
-        <ion-img src="http://localhost:3000/{{information.imageCtgory}}"></ion-img>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-text-center">
-      <ion-col>
-        <h1>{{information.name}}</h1>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-text-center">
-      <ion-col><ion-text>ID: {{information._id}}</ion-text></ion-col>
-      <!-- <ion-col><ion-text>Precio: {{information.price}}</ion-text></ion-col> -->
-    </ion-row>
-    <ion-row>
-      <ion-col class="ion-text-justify ion-padding">
-        {{ information.description }}
-        <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore illo minus nobis, ad expedita deleniti temporibus voluptatibus quae quaerat, odit aut? Facere ratione fuga laboriosam quibusdam ducimus totam, placeat reprehenderit?</p> -->
-
-      </ion-col>
-    </ion-row>
-    <br>
-  </ion-grid>
+  <ion-card style="color: black; border: 1px solid rgba(0,0,0,0.4)">
+    <ion-grid color="success" class="ion-no-padding" *ngIf="information">
+      <ion-row>
+        <ion-col class="ion-no-padding">
+          <img style="height: 180px; width: 100%;" src="http://localhost:3000{{information.imageCtgory}}" />
+        </ion-col>
+      </ion-row>
+      <ion-item class="ion-no-padding" lines="none">
+        <ion-text style="font-weight: bold; padding-left: 20px;">Deshabilitar/Habilitar</ion-text>
+        <ion-toggle [(ngModel)]="information.status" slot="end" (click)="enabled(information._id)" color="success"></ion-toggle>
+      </ion-item>
+      <ion-row class="ion-text-center">
+        <ion-col>
+          <h1 style="font-weight: bold;">{{information.name}}</h1>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row class="ion-text-center">
+        <ion-col><ion-text>ID: {{information._id}}</ion-text></ion-col>
+      </ion-row> -->
+      <ion-row>
+        <ion-col class="ion-text-justify ion-padding">
+          <ion-text style="font-weight: bold;">Descripcion: </ion-text>
+          <p>{{ information.description }}</p>
+          <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore illo minus nobis, ad expedita deleniti temporibus voluptatibus quae quaerat, odit aut? Facere ratione fuga laboriosam quibusdam ducimus totam, placeat reprehenderit?</p> -->
+  
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <!-- <ion-button color="primary">Primary</ion-button>
+  <ion-button color="secondary">Secondary</ion-button>
+  <ion-button color="tertiary">Tertiary</ion-button>
+  <ion-button color="success">Success</ion-button>
+  <ion-button color="warning">Warning</ion-button>
+  <ion-button color="danger">Danger</ion-button>
+  <ion-button color="light">Light</ion-button>
+  <ion-button color="medium">Medium</ion-button>
+  <ion-button color="dark">Dark</ion-button> -->
 
 </ion-content>

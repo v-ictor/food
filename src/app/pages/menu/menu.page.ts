@@ -9,15 +9,20 @@ export class MenuPage implements OnInit {
 
   pages = [
     {
-      title: 'Main',
+      title: 'Inicio',
       url: '/menu/main',
+      icon: 'home'
+    },
+    {
+      title: 'Comidas * Ctgry',
+      url: '/home',
       icon: 'home'
     },
     {
       title: 'Categorias',
       children: [
         {
-          title: 'Crear Categoria',
+          title: 'Agregar Categoria',
           url: '/menu/ins-ctgry',
           icon: 'add-circle'
         },
@@ -33,7 +38,7 @@ export class MenuPage implements OnInit {
       title: 'Comidas',
       children: [
         {
-          title: 'Crear Comida',
+          title: 'Agregar Comida',
           url: '/menu/ins-food',
           icon: 'add-circle'
         },

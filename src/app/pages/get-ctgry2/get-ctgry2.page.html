@@ -1,0 +1,35 @@
+<ion-header *ngIf="nameC">
+  <ion-toolbar color="dark">
+    <ion-buttons>
+      <ion-back-button slot="start" defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">{{nameC}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="info === null" class="ion-padding" style="border: 1px solid rgba(0,0,0,0.4)">
+    <!-- <ion-card-title class="ion-text-center">No hay comidas.</ion-card-title> -->
+    <ion-item class="ion-no-padding" lines="none">
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h2><ion-skeleton-text animated style="width: 80%"></ion-skeleton-text></h2>
+        <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card *ngIf="info != null" style="border: 1px solid rgba(0,0,0,0.4)">
+    <ion-item *ngFor="let i of info" detail [routerLink]="['/','get-food2',i._id]">
+      <ion-thumbnail slot="start">
+        <ion-img src="http://localhost:3000{{i.imageFood}}"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <h2><ion-text style="font-weight: bold;">{{i.title}}</ion-text></h2>
+        <p><ion-text color="success">{{i.price}} Bs.</ion-text></p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+</ion-content>

@@ -1,20 +1,37 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu/main"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">
+      Categorias
     </ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="dark">
+    <ion-searchbar aria-placeholder="Buscar categoria..." animated (ionChange)="buscarCategoria($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card style="border: 1px solid rgba(0,0,0,0.4)" *ngIf="information.length === 0">
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <ion-text>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-card>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-card style="border: 1px solid rgba(0,0,0,0.4)" *ngIf="information.length > 0">
+    <ion-item *ngFor="let i of information | filter: textoBuscar: 'name'" detail [routerLink]="['/','get-ctgry2',i.name]">
+      <ion-thumbnail slot="start">
+        <ion-img src="http://localhost:3000{{i.imageCtgory}}"></ion-img>
+      </ion-thumbnail>
+      <ion-text>{{i.name}}</ion-text>
+    </ion-item>
+  </ion-card>
 </ion-content>

@@ -10,21 +10,19 @@
 <ion-content>
 
   <ion-list>
-    <ion-item button *ngFor="let c of (categoriesData | async)" [routerLink]="['/','get-ctgry', c._id]">
-      <ion-card>
+    <!-- <ion-item button *ngFor="let c of (categoriesData | async)" [routerLink]="['/','get-ctgry', c._id]"> -->
+      <ion-card  *ngFor="let c of (categoriesData)" style="border: 1px solid rgba(0,0,0,0.4)">
         <!-- <ion-img src="http://localhost:3000/images/img/6fe924ef-dcec-4574-b358-7453b002911b.jpeg"></ion-img> -->
-        <ion-img src="http://localhost:3000/{{c.imageCtgory}}"></ion-img>
-        <ion-card-header>
-          <!-- <ion-card-subtitle>Destination</ion-card-subtitle> -->
-          <ion-card-title>{{ c.name }}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          {{ c.description }}
-          <!-- Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836. -->
-        </ion-card-content>
-    
+        <!-- <img src="http://localhost:3000/{{c.imageCtgory}}" /> -->
+        <ion-item class="ion-text-center" class="ion-no-padding">
+          <img src="http://localhost:3000{{c.imageCtgory}}" />
+          <ion-text style="padding-left: 20px; font-weight: bold; font-size: 15px;">{{ c.name }}</ion-text>
+        </ion-item>
+          <ion-button expand="block" [routerLink]="['/','get-ctgry',c._id]" color="dark">
+            <ion-icon slot="start" name="eye-outline"></ion-icon> Ver
+          </ion-button>
       </ion-card>
-    </ion-item>
+    <!-- </ion-item> -->
   </ion-list>
 
 </ion-content>

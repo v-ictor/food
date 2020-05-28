@@ -10,7 +10,7 @@
 <ion-menu contentId="content">
   <ion-header>
     <ion-toolbar color="dark">
-      <ion-title>Menu</ion-title>
+      <ion-title mode="ios">Menu</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>
@@ -29,7 +29,7 @@
       </ion-item>
       <ion-list *ngIf="p.open">
         <ion-menu-toggle>
-          <ion-item class="sub-item" *ngFor="let sub of p.children" [routerLink]="sub.url" routerDirection="root" routerLinkActive="active">
+          <ion-item class="sub-item" *ngFor="let sub of p.children" [routerLink]="sub.url" routerDirection="root" routerLinkActive="active" detail>
             <ion-icon [name]="sub.icon" slot="start"></ion-icon>
             <ion-label>{{ sub.title }}</ion-label>
           </ion-item>

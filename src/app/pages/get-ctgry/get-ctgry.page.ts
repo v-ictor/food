@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/services/category.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-get-ctgry',
@@ -12,7 +13,7 @@ export class GetCtgryPage implements OnInit {
 
   information = null;
 
-  constructor( private activatedRoute: ActivatedRoute, private categoryService: CategoryService, public router: Router, private alertCtrl: AlertController) { }
+  constructor( private activatedRoute: ActivatedRoute, private categoryService: CategoryService, public router: Router, private alertCtrl: AlertController, public toastCtrl: ToastController) { }
 
   ngOnInit() {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -21,7 +22,7 @@ export class GetCtgryPage implements OnInit {
     });
   }
 
-  async delete(information){
+  async delete(ides){
     const alertElement = await this.alertCtrl.create({
       header: 'Seguro que quieres eliminar la categoria.',
       buttons: [
@@ -32,14 +33,31 @@ export class GetCtgryPage implements OnInit {
         {
           text: 'Eliminar',
           handler: () => {
-            this.categoryService.delCategory(information._id).subscribe(response => {
-              this.router.navigate(['/menu/gets-ctgry']);
+            this.categoryService.delCategory(ides).subscribe(response => {
+              this.router.navigate(['/menu/main']);
             });
           }
         }
       ]
     });
     await alertElement.present();
+  }
+
+  msg = null;
+  async enabled(ides){
+    this.categoryService.enableCtgry(ides).subscribe(res => {
+      this.msg = res;
+      this.presentToast(this.msg.msg);
+    });//.unsubscribe();
+  }
+
+  async presentToast(text){
+    const toast = await this.toastCtrl.create({
+      message: text,
+      position: 'bottom',
+      duration: 1000
+    });
+    toast.present();
   }
 
 }

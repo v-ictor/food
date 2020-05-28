@@ -9,24 +9,28 @@ import { CategoryService } from "../../services/category.service";
 })
 export class GetsCtgryPage implements OnInit {
 
-  categoriesData: Observable<any>;
+  categoriesData: any;
 
   constructor(public categoryService: CategoryService) { 
-    this.categoriesData = this.categoryService.getCategories();
+    // this.categoriesData = this.categoryService.getCategories();
+    // this.getAllCategories();
   }
 
   ngOnInit() {
+    // this.categoriesData = this.categoryService.getCategories();
+    this.getAllCategories();
   }
 
   ionViewWillEnter(){
-    this.categoriesData = this.categoryService.getCategories();
+    // this.categoriesData = this.categoryService.getCategories();
+    this.getAllCategories();
   }
 
-  // getAllCategories(){
-  //   this.categoryService.getCategories().subscribe(response => {
-  //     console.log(response);
-  //     this.categoriesData = response;
-  //   })
-  // }
+  getAllCategories(){
+    this.categoryService.getCategories().subscribe((response) => {
+      // console.log(response);
+      this.categoriesData = response;
+    })
+  }
 
 }

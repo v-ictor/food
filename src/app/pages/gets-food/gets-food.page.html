@@ -9,18 +9,38 @@
 
 <ion-content>
 
-  <ion-list>
-    <ion-item button *ngFor="let item of (foodsData | async)" [routerLink]="['/','get-food', item._id]" detail>
-      <ion-avatar slot="start">
-        <!-- <ion-img [src]="item.imageUrl"></ion-img> -->
-        <ion-img src="http://localhost:3000/{{item.imageFood}}"></ion-img>
-      </ion-avatar>
-      <ion-label text-wrap>
-        <h3>{{item.title}}</h3>
-        <p>{{item._id}}</p>
-        <p>{{item.price}}</p>
-      </ion-label>
-    </ion-item>
+  <ion-list *ngIf="foodsData.length === 0" class="ion-no-padding">
+    <ion-card style="border: 1px solid rgba(0,0,0,0.4)">
+      <ion-item lines="none">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+  
+  <ion-list *ngIf="foodsData.length > 0" class="ion-no-padding">
+
+    <ion-card style="border: 1px solid rgba(0,0,0,0.4)">
+      <ion-item button *ngFor="let item of foodsData" [routerLink]="['/','get-food', item._id]" detail>
+        <ion-thumbnail slot="start">
+          <ion-img src="http://localhost:3000{{item.imageFood}}"></ion-img>
+        </ion-thumbnail>
+        <ion-label text-wrap>
+          <ion-text color="dark" style="font-weight: bold;" class="ion-text-capitalize">{{item.title}}</ion-text><br>
+          <ion-text style="font-weight: bold;" color="success">{{item.price}} Bs.</ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-card>
+
   </ion-list>
 
 </ion-content>

@@ -3,10 +3,48 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>insFood</ion-title>
+    <ion-title mode="ios">Agregar Comida</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card style="border: 1px solid rgba(0,0,0,0.4)">
+    <div class="center ion-padding">
+      <ion-item style="width: 95%; margin: auto;">
+        <ion-label position="floating">Nombre de la Comida: </ion-label>
+        <ion-input [(ngModel)]='datos.title'></ion-input>
+      </ion-item>
+      <ion-item style="width: 95%; margin: auto;">
+        <ion-label position="floating">Descripcion: </ion-label>
+        <ion-textarea [(ngModel)]='datos.description' aria-placeholder="Ingrese la comida" rows="5"></ion-textarea>
+      </ion-item>
+      <ion-item style="width: 95%; margin: auto;">
+        <ion-label position="floating">Precio: </ion-label>
+        <ion-input [(ngModel)]='datos.price' type="number" aria-placeholder="Ingrese la comida"></ion-input>
+      </ion-item>
+      <ion-item style="width: 95%; margin: auto;">
+        <ion-label>Categoria: </ion-label>
+        <ion-select [(ngModel)]="datos.category">
+          <ion-select-option *ngFor="let res of (results | async)">{{res.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item style="width: 95%; margin: auto;">
+        <ion-label position="floating">Ingredientes: </ion-label>
+        <ion-textarea [(ngModel)]='datos.ingredients' aria-placeholder="Ingrese la comida" rows="3"></ion-textarea>
+      </ion-item><br>
+      <ion-item lines="none">
+        <input type="file" class="hidden" (change)="onPhotoSelected($event)" #photoInput>
+        <img [src]="photoSelected || 'assets/images.png'" style="width: 100%; height: 200px; border: 1px solid rgba(0, 0, 0, 0.2); border-radius: 5px;"><br>
+        <!-- <img [src]="photoSelected || 'assets/images.png'" (click)="photoInput.click()" style="width: 100%; height: 200px;"> -->
+      </ion-item>
+      <ion-item lines="none">
+        <ion-button expand="block" style="width: 100%; height: 50px;" color="dark" (click)="photoInput.click()">
+          <ion-icon slot="start" name="camera"></ion-icon> Elegir Foto
+        </ion-button>
+        <ion-button expand="block" (click)="submitForm()" style="width: 100%; height: 50px;" color="dark">
+          <ion-icon slot="start" name="save"></ion-icon> Guardar
+        </ion-button>
+      </ion-item>
+    </div>
+  </ion-card>
 </ion-content>

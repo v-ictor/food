@@ -1,14 +1,28 @@
-<ion-header *ngIf="information">
-  <ion-toolbar color="dark">
+<ion-header>
+  <ion-toolbar color="dark" *ngIf="information === null">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/gets-food"></ion-back-button>
+      <ion-back-button defaultHref="/menu/gets-food"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{information.title}}</ion-title>
-    <ion-buttons slot="end">
-      <ion-button slot="start">
+    <ion-title mode="ios"> <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text> </ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button slot="start" [routerLink]="['/','upd-food', information._id]">
         <ion-icon name="brush"></ion-icon>
       </ion-button>
-      <ion-button slot="end" (click)="delete(information)">
+      <ion-button slot="end" (click)="delete(information._id)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+  <ion-toolbar color="dark" *ngIf="information != null">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu/gets-food"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">{{information.title}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button slot="start" [routerLink]="['/','upd-food', information._id]">
+        <ion-icon name="brush"></ion-icon>
+      </ion-button>
+      <ion-button slot="end" (click)="delete(information._id)">
         <ion-icon name="trash"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -17,40 +31,76 @@
 
 <ion-content>
 
-  <ion-grid color="success" class="ion-no-padding" *ngIf="information">
-    <ion-row>
-      <ion-col class="ion-no-padding">
-        <ion-img src="http://localhost:3000/{{information.imageFood}}"></ion-img>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-text-center">
-      <ion-col>
-        <h1>{{information.title}}</h1>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-text-center">
-      <ion-col><ion-text>ID: {{information._id}}</ion-text></ion-col>
-    </ion-row>
-    <br>
-    <ion-row class="ion-text-center">
-      <ion-col><ion-text>Precio: {{information.price}}</ion-text></ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col class="ion-text-justify ion-padding">
-        {{ information.description }}
-        <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore illo minus nobis, ad expedita deleniti temporibus voluptatibus quae quaerat, odit aut? Facere ratione fuga laboriosam quibusdam ducimus totam, placeat reprehenderit?</p> -->
+  <ion-card *ngIf="information === null" class="ion-padding" style="border: 1px solid rgba(0,0,0,0.4)">
+    <ion-item class="ion-no-padding">
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
 
-      </ion-col>
-    </ion-row>
-    <br>
-    <ion-row class="ion-text-justify ion-padding">
-      <ion-col class="ion-text-justify ion-padding">
-        {{ information.ingredients }}
-        <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore illo minus nobis, ad expedita deleniti temporibus voluptatibus quae quaerat, odit aut? Facere ratione fuga laboriosam quibusdam ducimus totam, placeat reprehenderit?</p> -->
-
-      </ion-col>
-    </ion-row>
-    <br>
-  </ion-grid>
+  <ion-card *ngIf="information != null" style="color: black; border: 1px solid rgba(0,0,0,0.4)">
+    <ion-grid color="success" class="ion-no-padding">
+      <ion-row>
+        <ion-col class="ion-no-padding">
+          <img style="height: 180px; width: 100%;" src="http://localhost:3000{{information.imageFood}}" />
+        </ion-col>
+      </ion-row>
+      <ion-item class="ion-no-padding" lines="none">
+        <ion-text style="font-weight: bold; padding-left: 20px;">Deshabilitar/Habilitar</ion-text>
+        <ion-toggle [(ngModel)]="information.status" color="success" slot="end" (click)="enabled(information._id)"></ion-toggle>
+      </ion-item><br>
+      <ion-row class="ion-text-center">
+        <ion-col class="ion-no-padding">
+          <ion-text style="font-weight: bold; font-size: 20px;">
+            {{information.title}}
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row class="ion-text-center">
+        <ion-col><ion-text>ID: {{information._id}}</ion-text></ion-col>
+      </ion-row> -->
+      <!-- <br> -->
+      <ion-row class="ion-text-center">
+        <ion-col>
+          <ion-text style="font-weight: bold; font-size: 15px;">Precio: </ion-text>
+          <ion-text style="font-weight: bold;" color="success">{{information.price}} Bs. </ion-text>
+        </ion-col>
+      </ion-row>
+      <!-- <br> -->
+      <ion-row>
+        <ion-col class="ion-text-justify ion-padding">
+          <ion-text style="font-weight: bold; font-size: 15px;">Descripcion:</ion-text>
+          <p>{{ information.description }}</p>  
+        </ion-col>
+      </ion-row>
+      <!-- <br> -->
+      <ion-row>
+        <ion-col class="ion-padding">
+          <ion-text style="font-weight: bold; font-size: 15px;">Categoria: </ion-text>
+          <ion-text>{{ information.category }}</ion-text>  
+        </ion-col>
+      </ion-row>
+      <!-- <br> -->
+      <ion-row>
+        <ion-col class="ion-text-justify ion-padding">
+          <ion-text style="font-weight: bold; font-size: 15px;">Ingredientes: </ion-text>
+          <p>{{ information.ingredients }}</p>
+        </ion-col>
+      </ion-row>
+      <!-- <br> -->
+    </ion-grid>
+  </ion-card>
 
 </ion-content>

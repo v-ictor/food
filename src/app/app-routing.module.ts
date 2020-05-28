@@ -29,7 +29,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/get-ctgry/get-ctgry.module').then( m => m.GetCtgryPageModule)
   },
   {
-    path: 'upd-ctgry',
+    path: 'upd-ctgry/:id',
     loadChildren: () => import('./pages/upd-ctgry/upd-ctgry.module').then( m => m.UpdCtgryPageModule)
   },
   // {
@@ -45,9 +45,18 @@ const routes: Routes = [
     loadChildren: () => import('./pages/get-food/get-food.module').then( m => m.GetFoodPageModule)
   },
   {
-    path: 'upd-food',
+    path: 'upd-food/:id',
     loadChildren: () => import('./pages/upd-food/upd-food.module').then( m => m.UpdFoodPageModule)
   },
+  {
+    path: 'get-food2/:id',
+    loadChildren: () => import('./pages/get-food2/get-food2.module').then( m => m.GetFood2PageModule)
+  },
+  {
+    path: 'get-ctgry2/:name',
+    loadChildren: () => import('./pages/get-ctgry2/get-ctgry2.module').then( m => m.GetCtgry2PageModule)
+  },
+
   // {
   //   path: 'main',
   //   loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule)
